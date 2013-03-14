@@ -121,7 +121,7 @@ function listaUsuarios($estado, $campo, $empezandoDe, $rowsSolicitados)
 			$extraCount = 0;
 			$result = '{"total":' . $rowCount[0] . ',"rows":[';
 			//Obtenemos los resultados para la consulta
-			$STH = $DBH->prepare("select id_tb_usuarios, concat(nombre, ' ', ap_paterno, ' ', ap_materno) as nombre, email_primario, (select nombre from CTG_DEPENDENCIAS as cd where cd.id_ctg_dependencias = tu.id_ctg_dependencias) as dependencia, (select tipo_usuario from CTG_TIPO_USUARIO as ctu where ctu.id_ctg_tipo_usuario = tu.id_ctg_tipo_usuarios) as tipo_usuario from TB_USUARIOS as tu where concat(nombre, ' ', ap_paterno, ' ', ap_materno) like ? and activo = ?");
+			$STH = $DBH->prepare("select id_tb_usuarios, concat(nombre, ' ', ap_paterno, ' ', ap_materno) as nombre, email, username, (select descripcion from CTG_TIPO_USUARIO as ctu where ctu.id_ctg_tipo_usuario = tu.id_ctg_tipo_usuario) as tipo_usuario from TB_USUARIOS as tu where concat(nombre, ' ', ap_paterno, ' ', ap_materno) like ? and activo = ?");
 			$campo = '%'.$campo.'%';
 			$STH->bindParam(1, $campo);
 			$STH->bindParam(2, $estado);
@@ -132,7 +132,7 @@ function listaUsuarios($estado, $campo, $empezandoDe, $rowsSolicitados)
 				if (!empty($row[1]))
 					$extraCount++;
 				
-				$result .= '{"ID":' . $row[0] . ',"NOMBRE":"' . $row[1] . '","EMAIL":"' . $row[2] . '", "DEPENDENCIA":"' . $row[3] . '","TIPO_USUARIO":"' . $row[4] . '"},';
+				$result .= '{"ID":' . $row[0] . ',"NOMBRE":"' . $row[1] . '","EMAIL":"' . $row[2] . '", "USERNAME":"' . $row[3] . '","TIPO_USUARIO":"' . $row[4] . '"},';
 			}//Fin de while($row = $STH->fetch())
 		}//Fin de if (campo != 'null')
 		else
@@ -147,7 +147,7 @@ function listaUsuarios($estado, $campo, $empezandoDe, $rowsSolicitados)
 			$extraCount = 0;
 			$result = '{"total":' . $rowCount[0] . ',"rows":[';
 			//Obtenemos los resultados para la consulta
-			$STH = $DBH->prepare("select id_tb_usuarios, concat(nombre, ' ', ap_paterno, ' ', ap_materno) as nombre, email_primario, (select nombre from CTG_DEPENDENCIAS as cd where cd.id_ctg_dependencias = tu.id_ctg_dependencias) as dependencia, (select tipo_usuario from CTG_TIPO_USUARIO as ctu where ctu.id_ctg_tipo_usuario = tu.id_ctg_tipo_usuarios) as tipo_usuario from TB_USUARIOS as tu where activo = ? ");
+			$STH = $DBH->prepare("select id_tb_usuarios, concat(nombre, ' ', ap_paterno, ' ', ap_materno) as nombre, email, username, (select descripcion from CTG_TIPO_USUARIO as ctu where ctu.id_ctg_tipo_usuario = tu.id_ctg_tipo_usuario) as tipo_usuario from TB_USUARIOS as tu where activo = ? ");
 			$STH->bindParam(1, $estado);
 			$STH->setFetchMode(PDO::FETCH_NUM);
 			$STH->execute();
@@ -156,7 +156,7 @@ function listaUsuarios($estado, $campo, $empezandoDe, $rowsSolicitados)
 				if (!empty($row[1]))
 					$extraCount++;
 				
-				$result .= '{"ID":' . $row[0] . ',"NOMBRE":"' . $row[1] . '","EMAIL":"' . $row[2] . '", "DEPENDENCIA":"' . $row[3] . '","TIPO_USUARIO":"' . $row[4] . '"},';
+				$result .= '{"ID":' . $row[0] . ',"NOMBRE":"' . $row[1] . '","EMAIL":"' . $row[2] . '", "USERNAME":"' . $row[3] . '","TIPO_USUARIO":"' . $row[4] . '"},';
 			}//Fin de while($row = $STH->fetch())
 		}//Fin de else en if (campo != 'null')
 	}//fin try

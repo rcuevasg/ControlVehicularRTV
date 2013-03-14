@@ -5,6 +5,9 @@ include "utilitiesUsuarios.php";
 
 $opt = $_POST['opt'];
 
+if (!isset($opt))
+	$opt = $_GET['opt'];
+
 switch ($opt) {
 	case 1:
 		//Opción para agregar un usuario del sistema
