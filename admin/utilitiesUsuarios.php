@@ -30,4 +30,29 @@ function logueaUsuario($username, $passwd) {
 	return $result;
 }
 
+/**
+*Funcion para obtener el listado de los tipos de usuario del sistema
+*@return string Cadena vacia en caso de no existir datos, en caso contrario regresa una cadena con el siguiente formato: id|tipoUsuario~id|tipoUsuario
+*/
+function listadoTipoUsuarios() {
+	$result = "";
+	include "connection.php";
+	
+	try {
+		$STH = $DBH->prepare("select * from CTG_TIPO_USUARIO");
+		$STH->setFetchMode(PDO::FETCH_NUM);
+		$STH->execute();
+		
+		while ($row = $STH->fetch()) {
+			$result .= $row[0] . "|" . $row[1] . "~";
+		}
+		
+	} catch (PDOException $ex) {
+		print $ex->getMessage();
+	}
+	
+	include "closeConnection.php";
+	return substr($result, 0, strlen($result) -1);
+}
+
 ?>
