@@ -19,10 +19,10 @@
 		//Existe sesion así que mostramos el menu
 		?>
 		<div id="menuAdmin">
-			<div id="mainMenu" class="easyui-accordion" style="width:300px;height:200px;">  
+			<div id="mainMenu" class="easyui-accordion" style="width:200px;">  
 				<div title="Usuarios" data-options="selected:true"  >  
 					<ul>
-						<li>Listado de usuarios</li>
+						<li><a href="#" onclick="$('#mainContent').load('usuarios.php?opt=2')" >Usuarios del sistema</a></li>
 						<li><a href="#" onclick="$('#mainContent').load('usuarios.php?opt=1')" >Agregar usuario</a></li>
 					</ul>
 				</div>  
