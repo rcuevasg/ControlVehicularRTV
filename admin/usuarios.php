@@ -100,17 +100,21 @@
 			function editaUsuarios()
 			{
 				var row = $('#dgUsuarios').datagrid('getSelected');
-				$('#mainContainer').load('usuarios.php?opt=3&id='+row.ID);
+				if (row == null) {
+					alert('Selecciona primero el usuario que quieres editar y luego presiona el botón editar');
+				} else {
+					$('#mainContent').load('usuarios.php?opt=3&id='+row.ID);
+				}
 			}
 			
 			function desactivaUsuario() {
 				var row = $('#dgUsuarios').datagrid('getSelected');
-				$('#mainContainer').load('accionesUsuarios.php?opt=5&id='+row.ID);
+				$('#mainContent').load('accionesUsuarios.php?opt=5&id='+row.ID);
 			}
 		
 			function agregaUsuarios()
 			{
-				$('#mainContainer').load('usuarios.php?opt=2');
+				$('#mainContent').load('usuarios.php?opt=1');
 			}
 		
 			function recarga()
@@ -147,5 +151,70 @@
 			
 			<?php
 			break;//Fin del case 2
+			
+		case 3 :
+			//Caso para editar la información de un usuario
+			$idUsuario = $_GET['id'];
+			$usuario = obtenDatosUsuario($idUsuario);
+			
+			$datosUsuario = explode("|", $usuario);
+			//nombre|ap_paterno|ap_materno|email|username|id_ctg_tipo_usuario|fecha_creado|fecha_modificado|usuario_creo|usuario_modifico|activo
+			
+			?>
+			
+			<script type="text/javascript">
+				$(function(){
+					$('#frmModificaUsuario').form({
+						url:'accionesUsuarios.php',
+						onSubmit:function(){
+							return $(this).form('validate');
+						},
+						success:function(data){
+							//$.messager.alert('Info', data, 'info');
+							if (data.indexOf('php') > -1)
+								document.location = data;
+							else
+								$('#mensajes').html(data);//data;
+						}
+					});
+				});
+			</script>
+			<div id="mensajes"></div>
+			<form name="frmModificaUsuario" id="frmModificaUsuario" method="post" >
+				<input type="hidden" name="opt" id="opt" value="3" >
+				<input type="hidden" name="idUsuarioAModificar" id="idUsuarioAModificar" value="<?php print $idUsuario ?>" >
+				<input type="text" required="required" name="txtNombre" id="txtNombre" placeholder="Nombre" value="<?php print $datosUsuario[0]; ?>" >
+				<input type="text" required="required" name="txtApPaterno" id="txtApPaterno" placeholder="Apellido paterno" value="<?php print $datosUsuario[1]; ?>" >
+				<input type="text"  name="txtApMaterno" id="txtApMaterno" placeholder="Apellido materno" value="<?php print $datosUsuario[2]; ?>" >
+				<input type="email" required="required" name="txtCorreo" id="txtCorreo" placeholder="Correo electr&oacute;nico" value="<?php print $datosUsuario[3]; ?>" >
+				<input type="text" required="required" name="txtNombreUsuario" id="txtNombreUsuario" placeholder="Nombre de usuario" value="<?php print $datosUsuario[4]; ?>" readonly >
+				<input type="password" name="txtPasswd" id="txtPasswd" placeholder="Contrase&ntilde;a" >
+				<input type="password" name="txtConfirmaPasswd" id="txtConfirmaPasswd" placeholder="Repite contrase&ntilde;a" >
+				<?php
+				$tiposUsuario = listadoTipoUsuarios();
+				if (!empty($tiposUsuario)):
+					?>
+					<select name="txtTipoUsuario" id="txtTipoUsuario">
+					<?php
+					$listadoTipoUsuarios = explode("~", $tiposUsuario);
+					foreach($listadoTipoUsuarios as $tipoUsuario) {
+						$datosTipo = explode("|", $tipoUsuario);
+						?>
+						<option value="<?php print $datosTipo[0] ?>" <?php if ($datosTipo[0] == $datosUsuario[5]) { print "selected"; } ?> ><?php print $datosTipo[1] ?></option>
+						<?php
+					}
+					?>
+					</select>
+					<?php
+				endif;
+				?>
+				<select name="txtEstado" id="txtEstado">
+				</select>
+				<button type="submit" value="Actualizar usuario" >Actuaizar usuario</button>
+			</form>
+			
+			<?php
+			
+			break; //Fin del case 3 
 	}
 ?>

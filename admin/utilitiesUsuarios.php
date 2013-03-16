@@ -61,10 +61,11 @@ function listadoTipoUsuarios() {
 *@param string $ap_paterno Apellido paterno del usuario
 *@param string $ap_materno Apellido materno del usuario
 *@param string $email Correo electrónico del usuario
+*@param string $username Nombre de usuario que usara para loguearse al sistema
 *@param string $passwd Contraseña de usuario
 *@param integer $id_ctg_tipo_usuario Identificador del tipo de usuario, id del catálogo CTG_TIPO_USUARIO
 *@param integer $usuario_creo Identificador del usuario que esta creando al usuario
-*@result integer 0 en caso de error y 1 en caso de exito
+*@return integer 0 en caso de error y 1 en caso de exito
 */
 function registraUsuario($nombre, $ap_paterno, $ap_materno, $email, $username, $passwd, $id_ctg_tipo_usuario, $usuario_creo) {
 	$result = 0;
@@ -175,6 +176,114 @@ function listaUsuarios($estado, $campo, $empezandoDe, $rowsSolicitados)
 	{
 		return $result . ']}';
 	}//Fin else
+}
+
+/**
+*Función para obtener todos los datos de un usuario
+*@param integer $id Identificador del usuario, id de tabla
+*@return string Cadena con el siguiente formato: nombre|ap_paterno|ap_materno|email|username|id_ctg_tipo_usuario|fecha_creado|fecha_modificado|usuario_creo|usuario_modifico|activo
+*/
+function obtenDatosUsuario($id) {
+	$result = "";
+	include "connection.php";
+	
+	try {
+		$STH = $DBH->prepare("select nombre, ap_paterno, ap_materno, email, username, id_ctg_tipo_usuario, fecha_creado, fecha_modificado, usuario_creo, usuario_modifico, activo from TB_USUARIOS where id_tb_usuarios = ?");
+		$STH->bindParam(1, $id);
+		$STH->setFetchMode(PDO::FETCH_NUM);
+		$STH->execute();
+		
+		while ($row = $STH->fetch()) {
+			$result .= $row[0] . "|" . $row[1] . "|" . $row[2] . "|" . $row[3] . "|" . $row[4] . "|" . $row[5] . "|" . $row[6] . "|" . $row[7] . "|" . $row[8] . "|" . $row[9] . "|" . $row[10];
+		}
+		
+	} catch (PDOException $ex) {
+		print $ex->getMessage();
+	}
+	
+	include "closeConnection.php";
+	return $result;
+}
+
+/**
+*Funcion para actualizar los datos de un usuario del sistema
+*@param string $nombre Nombre del usuario
+*@param string $ap_paterno Apellido paterno del usuario
+*@param string $ap_materno Apellido materno del usuario
+*@param string $email Correo electrónico del usuario
+*@param string $passwd Contraseña de usuario
+*@param integer $id_ctg_tipo_usuario Identificador del tipo de usuario, id del catálogo CTG_TIPO_USUARIO
+*@param integer $usuario_modifico Identificador del usuario que esta modificando al usuario
+*@param integer $idUsuario Identificador del usuario a modificar, id de tabla
+*@param integer $estado Estado del usuario 0 para inactivo y 1 para activo
+*@return integer 0 en caso de error y 1 en caso de exito
+*/
+function actualizaUsuario($nombre, $ap_paterno, $ap_materno, $email, $passwd, $id_ctg_tipo_usuario, $usuario_modifico, $idUsuario, $estado) {
+	$result = 0;
+	include "connection.php";
+	
+	try {
+		if (!empty($passwd)) {
+			//Si la contraseña no viene vacía actualizamos la contraseña
+			$STH = $DBH->prepare("update TB_USUARIOS set nombre = ?, ap_paterno = ?, ap_materno = ?, email = ?, passwd = MD5(?), id_ctg_tipo_usuario = ?, fecha_modificado = now(), usuario_modifico = ?, activo = ? where id_tb_usuarios = ?");
+			$STH->bindParam(1, $nombre);
+			$STH->bindParam(2, $ap_paterno);
+			$STH->bindParam(3, $ap_materno);
+			$STH->bindParam(4, $email);
+			$STH->bindParam(5, $passwd);
+			$STH->bindParam(6, $id_ctg_tipo_usuario);
+			$STH->bindParam(7, $usuario_modifico);
+			$STH->bindParam(8, $estado);
+			$STH->bindParam(9, $idUsuario);
+			$STH->execute();
+		
+			$result = $STH->rowCount();
+		} else {
+			//La contraseña viene vacia por lo que no se actualiza el campo
+			$STH = $DBH->prepare("update TB_USUARIOS set nombre = ?, ap_paterno = ?, ap_materno = ?, email = ?, id_ctg_tipo_usuario = ?, fecha_modificado = now(), usuario_modifico = ?, activo = ? where id_tb_usuarios = ?");
+			$STH->bindParam(1, $nombre);
+			$STH->bindParam(2, $ap_paterno);
+			$STH->bindParam(3, $ap_materno);
+			$STH->bindParam(4, $email);
+			$STH->bindParam(5, $id_ctg_tipo_usuario);
+			$STH->bindParam(6, $usuario_modifico);
+			$STH->bindParam(7, $estado);
+			$STH->bindParam(8, $idUsuario);
+			$STH->execute();
+		
+			$result = $STH->rowCount();
+		}
+		
+	} catch (PDOException $ex) {
+		print $ex->getMessage();
+	}
+	
+	include "closeConnection.php";
+	return $result;
+}
+
+/**
+*Funcion para desactivar la cuenta de un usuario
+*@param integer $idUsuario Identificador del usuario a modificar, id de tabla
+*@param integer $usuario_modifico Identificador del usuario que esta realizando la modificacion, id de tabla
+*@return integer 0 en caso de error y 1 en caso de éxito
+*/
+function desactivaUsuario($idUsuario, $usuario_modifico) {
+	$result = 0;
+	include "connection.php";
+	
+	try {
+		$STH = $DBH->prepare("update TB_USUARIOS set activo = false, fecha_modificado = now(), usuario_modifico = ? where id_tb_usuarios = ?");
+		$STH->bindParam(1, $usuario_modifico);
+		$STH->bindParam(2, $idUsuario);
+		$STH->execute();
+		$result = $STH->rowCount();
+	} catch (PDOException $ex) {
+		print $ex->getMessage();
+	}
+	
+	include "closeConnection.php";
+	return $result;
 }
 
 ?>
