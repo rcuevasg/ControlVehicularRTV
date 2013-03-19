@@ -7,7 +7,7 @@
 	
 	switch ($opt) {
 		case 1:
-			//Opcion para agregar un usuario
+			//Opcion para agregar un chofer
 			?>
 			<script type="text/javascript">
 				$(function(){
@@ -17,7 +17,6 @@
 							return $(this).form('validate');
 						},
 						success:function(data){
-							//$.messager.alert('Info', data, 'info');
 							if (data.indexOf('php') > -1)
 								document.location = data;
 							else
@@ -33,6 +32,7 @@
 				<input type="text" required="required" name="txtApPaterno" id="txtApPaterno" placeholder="Apellido paterno" >
 				<input type="text"  name="txtApMaterno" id="txtApMaterno" placeholder="Apellido materno" >
 				<input type="text" required="required" name="txtNumLicencia" id="txtNumLicencia" placeholder="Num. Licencia" >
+				<input type="text" required="required" name="txtVigLicencia" id="txtVigLicencia" placeholder="Vigencia Licencia" >
 				<button type="submit" value="Guardar usuario" >Guardar usuario</button>
 			</form>
 			<?php
@@ -40,65 +40,66 @@
 			
 		case 2: 
 			//Case para listar los usuarios registrados en el sistema
-			?>
-			
+			?>			
 			<script>
 			$(function(){
-				$('#dgUsuarios').datagrid({
+				$('#dgChoferes').datagrid({
 					toolbar:[{
 						id:'btnAgregar',
 						text:'Agregar',
 						iconCls:'icon-add',
 						handler:function(){
-							agregaUsuarios();
+							agregaChofer();
 						}
 					},{
 						id:'btnEdit',
 						text:'Editar',
 						iconCls:'icon-edit',
 						handler:function(){
-							//$('#btnsave').linkbutton('enable');
-							//alert('cut')
-							editaUsuarios();
+							editaChofer();
 						}
 					},{
 						id:'btnDelete',
-						text:'Desactivar usuario',
+						text:'Desactivar chofer',
 						iconCls:'icon-remove',
 						handler:function(){
 							//$('#btnsave').linkbutton('enable');
 							//alert('cut')
-							if (confirm("¿Esta seguro de querer desactivar este usuario?")) {
-								desactivaUsuario();
+							if (confirm("¿Esta seguro de querer desactivar este chofer?")) {
+								desactivaChofer();
 							}
 						}
 					}]
 				}); 
 			});
 		
-			function editaUsuarios()
+			function editaChofer()
 			{
-				var row = $('#dgUsuarios').datagrid('getSelected');
-				$('#mainContainer').load('usuarios.php?opt=3&id='+row.ID);
+				var row = $('#dgChoferes').datagrid('getSelected');
+				if (row == null) {
+					alert('Selecciona primero el chofer que quieres editar y luego presiona el botón editar');
+				} else {
+					$('#mainContent').load('choferes.php?opt=3&id='+row.ID);
+				}
 			}
 			
-			function desactivaUsuario() {
-				var row = $('#dgUsuarios').datagrid('getSelected');
-				$('#mainContainer').load('accionesUsuarios.php?opt=5&id='+row.ID);
+			function desactivaChofer() {
+				var row = $('#dgChoferes').datagrid('getSelected');
+				$('#mainContent').load('accionesChoferes.php?opt=4&id='+row.ID);
 			}
 		
-			function agregaUsuarios()
+			function agregaChofer()
 			{
-				$('#mainContainer').load('usuarios.php?opt=2');
+				$('#mainContent').load('choferes.php?opt=1');
 			}
 		
 			function recarga()
 			{
-				$('#dgUsuarios').datagrid('load', {'campo':$('#txtCampoBusqueda').val(), 'estado':$('#txtEstadoBusqueda').val()});
+				$('#dgChoferes').datagrid('load', {'campo':$('#txtCampoBusqueda').val(), 'estado':$('#txtEstadoBusqueda').val()});
 			}
 			</script>
         
-        	<h2><strong>Usuarios del Sistema</strong></h2>
+        	<h2><strong>Choferes</strong></h2>
 
         	<div id="buscador">
         		<label>Nombre o parte del mismo</label>
@@ -111,20 +112,67 @@
         		<input type="button" id="btnBuscar" name="Buscar" value="Buscar" onclick="recarga()" />
         	</div>
         
-			<table id="dgUsuarios" title="Usuarios del Sistema" class="easyui-datagrid" style="width:600px;height:750px"  
-        		url="accionesUsuarios.php?opt=2"  
+			<table id="dgChoferes" title="Choferes" class="easyui-datagrid" style="width:600px;height:750px"  
+        		url="accionesChoferes.php?opt=2"  
         		rownumbers="true" fitColumns="true" singleSelect="true" pagination="true" pageSize="50" nowrap="false">  
 	    	<thead>  
     	    	<tr>  
         	    	<th field="NOMBRE" width="50">Nombre</th>  
-            		<th field="EMAIL" width="50">Correo Electr&oacute;nico</th>
-            		<th field="USERNAME" width="50">Nombre de usuario</th>  
-	            	<th field="TIPO_USUARIO" width="50">Tipo usuario</th>    
+            		<th field="NUMLICENCIA" width="50">N&uacute;mero de Licencia</th>
+            		<th field="VIGLICENCIA" width="50">Vigencia Licencia</th>  
         		</tr>  
 	    	</thead>  
 			</table>
 			
 			<?php
 			break;//Fin del case 2
+		
+		case 3 :
+			//Caso para editar la información de un chofer
+			$idChofer = $_GET['id'];
+			$chofer = obtenDatosChofer($idChofer);
+			
+			$datosChofer = explode("|", $chofer);
+			//nombre|ap_paterno|ap_materno|num_licencia|vigencia_licencia|activo
+			
+			?>
+			
+			<script type="text/javascript">
+				$(function(){
+					$('#frmModificaChofer').form({
+						url:'accionesChoferes.php',
+						onSubmit:function(){
+							return $(this).form('validate');
+						},
+						success:function(data){
+							//$.messager.alert('Info', data, 'info');
+							if (data.indexOf('php') > -1)
+								document.location = data;
+							else
+								$('#mensajes').html(data);//data;
+						}
+					});
+				});
+			</script>
+			<div id="mensajes"></div>
+			<form name="frmModificaChofer" id="frmModificaChofer" method="post" >
+				<input type="hidden" name="opt" id="opt" value="3" >
+				<input type="hidden" name="idChoferAModificar" id="idChoferAModificar" value="<?php print $idChofer ?>" >
+				<input type="text" required="required" name="txtNombre" id="txtNombre" placeholder="Nombre" value="<?php print $datosChofer[0]; ?>" >
+				<input type="text" required="required" name="txtApPaterno" id="txtApPaterno" placeholder="Apellido paterno" value="<?php print $datosChofer[1]; ?>" >
+				<input type="text"  name="txtApMaterno" id="txtApMaterno" placeholder="Apellido materno" value="<?php print $datosChofer[2]; ?>" >
+				<input type="text" required="required" name="txtNumLicencia" id="txtNumLicencia" placeholder="Num. Licencia" value="<?php print $datosChofer[3]; ?>" >
+				<input type="text" required="required" name="txtVigLicencia" id="txtVigLicencia" placeholder="Vigencia Licencia" value="<?php print $datosChofer[4]; ?>" >
+				<select name="txtEstado" id="txtEstado">
+					<option value="1" <?php if ($datosChofer[5] == 1) { print "selected"; } ?> >Activo</option>
+					<option value="0" <?php if ($datosChofer[5] == 0) { print "selected"; } ?> >Inactivo</option>
+				</select>
+				<button type="submit" value="Actualizar usuario" >Actuaizar usuario</button>
+			</form>
+			
+			<?php
+			
+			break; //Fin del case 3 
+
 	}
 ?>

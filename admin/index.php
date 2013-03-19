@@ -28,7 +28,7 @@
 				</div>  
 				<div title="Choferes" >  
 					<ul>
-						<li>Listado de choferes</li>
+						<li><a href="#" onclick="$('#mainContent').load('choferes.php?opt=2')" >Listado de choferes</li>
 						<li><a href="#" onclick="$('#mainContent').load('choferes.php?opt=1')" >Agregar chofer</a></li>
 					</ul>  
 				</div>  
