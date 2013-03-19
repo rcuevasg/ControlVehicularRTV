@@ -29,7 +29,7 @@
 				<div title="Choferes" >  
 					<ul>
 						<li>Listado de choferes</li>
-						<li>Agregar chofer</li>
+						<li><a href="#" onclick="$('#mainContent').load('choferes.php?opt=1')" >Agregar chofer</a></li>
 					</ul>  
 				</div>  
 				<div title="Salidas y Entradas">  
