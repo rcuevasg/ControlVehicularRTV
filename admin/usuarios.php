@@ -109,7 +109,7 @@
 			
 			function desactivaUsuario() {
 				var row = $('#dgUsuarios').datagrid('getSelected');
-				$('#mainContent').load('accionesUsuarios.php?opt=5&id='+row.ID);
+				$('#mainContent').load('accionesUsuarios.php?opt=4&id='+row.ID);
 			}
 		
 			function agregaUsuarios()
@@ -209,6 +209,8 @@
 				endif;
 				?>
 				<select name="txtEstado" id="txtEstado">
+					<option value="1" <?php if ($datosUsuario[10] == 1) { print "selected"; } ?> >Activo</option>
+					<option value="0" <?php if ($datosUsuario[10] == 0) { print "selected"; } ?> >Inactivo</option>
 				</select>
 				<button type="submit" value="Actualizar usuario" >Actuaizar usuario</button>
 			</form>

@@ -68,11 +68,12 @@ switch ($opt) {
 		$confirmaPasswd = $_POST['txtConfirmaPasswd'];
 		$id_ctg_tipo_usuario = $_POST['txtTipoUsuario']; 
 		$usuario_modifico = $_SESSION['idUsuario'];
+		$activo = $_POST['txtEstado'];
 		
 		//Verificamos que las contraseñas coincidan
 		if ($passwd == $confirmaPasswd) {
 			//Si las contraseñas coinciden procedemos al registro
-			$res = actualizaUsuario($nombre, $ap_paterno, $ap_materno, $email, $passwd, $id_ctg_tipo_usuario, $usuario_modifico, $idUsuario);
+			$res = actualizaUsuario($nombre, $ap_paterno, $ap_materno, $email, $passwd, $id_ctg_tipo_usuario, $usuario_modifico, $idUsuario, $activo);
 			
 			//Verificamos el exito del registro
 			if ($res > 0) {
@@ -88,6 +89,23 @@ switch ($opt) {
 		}//Fin del else de if passwd == confirmaPasswd
 		
 		break; //Fin del case 3
+		
+	case 4:
+		//Case para desactivar un usuario
+		$idUsuario = $_GET['id'];
+		
+		$res = desactivaUsuario($idUsuario, $_SESSION['idUsuario']);
+		
+		//Verifica si se modifico correctamente el registrp
+		if ($res > 0) {
+			//Se registro de manera correcta
+			print "<div class='exito'>El usuario se desactivo de manera correcta.</div>";
+		} else {
+			//Ocurrio algo y no se realizo el registro
+			print "<div class='error'>Ocurrio un problema al intentar desactivar al usuario, por favor int&eacute;ntalo mas tarde.</div>";
+		} //Fin del else de if res > 0
+		
+		break; //Fin del case 4
 } //Fin del switch $opt
 
 ?>
