@@ -40,8 +40,8 @@
 				</div>  
 				<div title="Veh&iacute;culos">  
 					<ul>
-						<li>Listado de veh&iacute;culos</li>
-						<li>Agregar veh&iacute;culos</li>
+						<li><a href="#" onclick="$('#mainContent').load('vehiculos.php?opt=2')" >Listado de veh&iacute;culos</a></li>
+						<li><a href="#" onclick="$('#mainContent').load('vehiculos.php?opt=1')" >Agregar veh&iacute;culos</a></li>
 					</ul> 
 				</div>
 				<div title="Reportes">  
