@@ -26,6 +26,7 @@
 				});
 			</script>
 			<div id="mensajes"></div>
+			<h3>Registrar un veh&iacute;culo</h3>
 			<form name="frmAgregaVehiculo" id="frmAgregaVehiculo" method="post" >
 				<input type="hidden" name="opt" id="opt" value="1" >
 				<input type="text" name="txtPlacasV" id="txtPlacasV" placeholder="Placas Anteriores" >
@@ -75,7 +76,7 @@
 				?>
 				<input type="text" name="txtNomUnidad" id="txtNomUnidad" placeholder="Nombre de la Unidad" >
 				<textarea name="txtDescripcion" id="txtDescripcion"  placeholder="Descripción" cols="80" rows="3"></textarea>
-				<button type="submit" value="Guardar usuario" >Guardar usuario</button>
+				<button class="button" type="submit" value="Guardar usuario" >Guardar usuario</button>
 			</form>
 			<?php
 			break; //Fin del case 1
@@ -141,17 +142,16 @@
 			}
 			</script>
         
-        	<h2><strong>Vehiculos</strong></h2>
+        	<h3>Veh&iacute;culos</h3>
 
         	<div id="buscador">
-        		<label>Placas o parte del mismo</label>
-        		<input type="text" id="txtCampoBusqueda" name="txtCampoBusqueda" />
+        		<input type="text" id="txtCampoBusqueda" name="txtCampoBusqueda" placeholder="Placas o nombre del veh&iacute;culo" />
         		<label>Estado</label>
-        		<select name="txtEstadoBusqueda" id="txtEstadoBusqueda">
+        		<select name="txtEstadoBusqueda" id="txtEstadoBusqueda" style="width:90px; display:inline-block;" >
         			<option value="1">Activos</option>
         			<option value="0">Inactivos</option>
         		</select>
-        		<input type="button" id="btnBuscar" name="Buscar" value="Buscar" onclick="recarga()" />
+        		<input type="button" id="btnBuscar" name="Buscar" class="button" value="Buscar" onclick="recarga()" />
         	</div>
         
 			<table id="dgVehiculos" title="Vehiculos" class="easyui-datagrid" style="width:800px;height:720px"  
@@ -200,6 +200,7 @@
 				});
 			</script>
 			<div id="mensajes"></div>
+			<h3>Modificar veh&iacute;culo</h3>
 			<form name="frmModificaVehiculo" id="frmModificaVehiculo" method="post" >
 				<input type="hidden" name="opt" id="opt" value="3" >
 				<input type="hidden" name="idVehiculoAModificar" id="idVehiculoAModificar" value="<?php print $idVehiculo ?>" >
@@ -254,7 +255,7 @@
 					<option value="1" <?php if ($datosVehiculo[13] == 1) { print "selected"; } ?> >Activo</option>
 					<option value="0" <?php if ($datosVehiculo[13] == 0) { print "selected"; } ?> >Inactivo</option>
 				</select>
-				<button type="submit" value="Actualizar usuario" >Actuaizar usuario</button>
+				<button class="button" type="submit" value="Actualizar usuario" >Actuaizar usuario</button>
 			</form>
 			
 			<?php
