@@ -26,14 +26,15 @@
 				});
 			</script>
 			<div id="mensajes"></div>
+			<h3>Agregar un chofer</h3>
 			<form name="frmAgregaChofer" id="frmAgregaChofer" method="post" >
 				<input type="hidden" name="opt" id="opt" value="1" >
 				<input type="text" required="required" name="txtNombre" id="txtNombre" placeholder="Nombre" >
 				<input type="text" required="required" name="txtApPaterno" id="txtApPaterno" placeholder="Apellido paterno" >
 				<input type="text"  name="txtApMaterno" id="txtApMaterno" placeholder="Apellido materno" >
 				<input type="text" required="required" name="txtNumLicencia" id="txtNumLicencia" placeholder="Num. Licencia" >
-				<input type="text" required="required" name="txtVigLicencia" id="txtVigLicencia" placeholder="Vigencia Licencia" >
-				<button type="submit" value="Guardar usuario" >Guardar usuario</button>
+				<input type="text" required="required" name="txtVigLicencia" id="txtVigLicencia" placeholder="Vigencia Licencia (Formato DD/MM/AAAA)" >
+				<button class="button" type="submit" value="Guardar usuario" >Guardar chofer</button>
 			</form>
 			<?php
 			break; //Fin del case 1
@@ -99,17 +100,16 @@
 			}
 			</script>
         
-        	<h2><strong>Choferes</strong></h2>
+        	<h3>Choferes</h3>
 
         	<div id="buscador">
-        		<label>Nombre o parte del mismo</label>
-        		<input type="text" id="txtCampoBusqueda" name="txtCampoBusqueda" />
+        		<input type="text" id="txtCampoBusqueda" name="txtCampoBusqueda" placeholder="Nombre o parte del mismo" />
         		<label>Estado</label>
-        		<select name="txtEstadoBusqueda" id="txtEstadoBusqueda">
+        		<select name="txtEstadoBusqueda" id="txtEstadoBusqueda" style="width:90px; display:inline-block;" >
         			<option value="1">Activos</option>
         			<option value="0">Inactivos</option>
         		</select>
-        		<input type="button" id="btnBuscar" name="Buscar" value="Buscar" onclick="recarga()" />
+        		<input type="button" id="btnBuscar" name="Buscar" class="button" value="Buscar" onclick="recarga()" />
         	</div>
         
 			<table id="dgChoferes" title="Choferes" class="easyui-datagrid" style="width:600px;height:750px"  
@@ -155,6 +155,7 @@
 				});
 			</script>
 			<div id="mensajes"></div>
+			<h3>Editar chofer</h3>
 			<form name="frmModificaChofer" id="frmModificaChofer" method="post" >
 				<input type="hidden" name="opt" id="opt" value="3" >
 				<input type="hidden" name="idChoferAModificar" id="idChoferAModificar" value="<?php print $idChofer ?>" >
@@ -162,12 +163,12 @@
 				<input type="text" required="required" name="txtApPaterno" id="txtApPaterno" placeholder="Apellido paterno" value="<?php print $datosChofer[1]; ?>" >
 				<input type="text"  name="txtApMaterno" id="txtApMaterno" placeholder="Apellido materno" value="<?php print $datosChofer[2]; ?>" >
 				<input type="text" required="required" name="txtNumLicencia" id="txtNumLicencia" placeholder="Num. Licencia" value="<?php print $datosChofer[3]; ?>" >
-				<input type="text" required="required" name="txtVigLicencia" id="txtVigLicencia" placeholder="Vigencia Licencia" value="<?php print $datosChofer[4]; ?>" >
+				<input type="text" required="required" name="txtVigLicencia" id="txtVigLicencia" placeholder="Vigencia Licencia (Formato DD/MM/AAAA)" value="<?php print $datosChofer[4]; ?>" >
 				<select name="txtEstado" id="txtEstado">
 					<option value="1" <?php if ($datosChofer[5] == 1) { print "selected"; } ?> >Activo</option>
 					<option value="0" <?php if ($datosChofer[5] == 0) { print "selected"; } ?> >Inactivo</option>
 				</select>
-				<button type="submit" value="Actualizar usuario" >Actuaizar usuario</button>
+				<button type="submit" class="button" value="Actualizar usuario" >Actuaizar usuario</button>
 			</form>
 			
 			<?php

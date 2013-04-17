@@ -27,6 +27,9 @@
 				});
 			</script>
 			<div id="mensajes"></div>
+			
+			<h3>Agregar usuario nuevo</h3>
+			
 			<form name="frmAgregaUsuario" id="frmAgregaUsuario" method="post" >
 				<input type="hidden" name="opt" id="opt" value="1" >
 				<input type="text" required="required" name="txtNombre" id="txtNombre" placeholder="Nombre" >
@@ -54,7 +57,7 @@
 					<?php
 				endif;
 				?>
-				<button type="submit" value="Guardar usuario" >Guardar usuario</button>
+				<button class="button" type="submit" value="Guardar usuario" >Guardar usuario</button>
 			</form>
 			<?php
 			break; //Fin del case 1
@@ -123,17 +126,16 @@
 			}
 			</script>
         
-        	<h2><strong>Usuarios del Sistema</strong></h2>
+        	<h3>Usuarios del Sistema</h3>
 
         	<div id="buscador">
-        		<label>Nombre o parte del mismo</label>
-        		<input type="text" id="txtCampoBusqueda" name="txtCampoBusqueda" />
+        		<input type="text" id="txtCampoBusqueda" name="txtCampoBusqueda" placeholder="Nombre del usuario o parte del mismo" />
         		<label>Estado</label>
-        		<select name="txtEstadoBusqueda" id="txtEstadoBusqueda">
+        		<select name="txtEstadoBusqueda" id="txtEstadoBusqueda" style="width:90px; display:inline-block;">
         			<option value="1">Activos</option>
         			<option value="0">Inactivos</option>
         		</select>
-        		<input type="button" id="btnBuscar" name="Buscar" value="Buscar" onclick="recarga()" />
+        		<input class="button" type="button" id="btnBuscar" name="Buscar" value="Buscar" onclick="recarga()" />
         	</div>
         
 			<table id="dgUsuarios" title="Usuarios del Sistema" class="easyui-datagrid" style="width:600px;height:750px"  
@@ -180,6 +182,7 @@
 				});
 			</script>
 			<div id="mensajes"></div>
+			<h3>Editar usuario</h3>
 			<form name="frmModificaUsuario" id="frmModificaUsuario" method="post" >
 				<input type="hidden" name="opt" id="opt" value="3" >
 				<input type="hidden" name="idUsuarioAModificar" id="idUsuarioAModificar" value="<?php print $idUsuario ?>" >
@@ -212,7 +215,7 @@
 					<option value="1" <?php if ($datosUsuario[10] == 1) { print "selected"; } ?> >Activo</option>
 					<option value="0" <?php if ($datosUsuario[10] == 0) { print "selected"; } ?> >Inactivo</option>
 				</select>
-				<button type="submit" value="Actualizar usuario" >Actuaizar usuario</button>
+				<button class="button" type="submit" value="Actualizar usuario" >Actuaizar usuario</button>
 			</form>
 			
 			<?php

@@ -1,6 +1,6 @@
 .panel {
   overflow: hidden;
-  font-size: 12px;
+  font-size: 16px;
   text-align: left;
 }
 .panel-header,
@@ -158,7 +158,7 @@
   filter: none;
 }
 .accordion .accordion-header-selected {
-  background: #0081c2;
+  background: #394053;
 }
 .accordion .accordion-header-selected .panel-title {
   color: #fff;

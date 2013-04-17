@@ -1,0 +1,180 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#divLogin {
+	margin: 0 auto;
+	width: 300px;
+	-webkit-box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    7px 7px 5px rgba(50, 50, 50, 0.75);
+	box-shadow:         7px 7px 5px rgba(50, 50, 50, 0.75);
+	padding: 20px;
+    text-align: center;
+    background: #494F5F;
+}
+
+#divLogin h3 {
+	color: #FFF;
+}
+
+#divLogin input[type="text"], #divLogin input[type="password"]
+{
+	border: 0 none;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 250px;
+    -webkit-box-shadow: 4px 4px 6px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    4px 4px 6px rgba(50, 50, 50, 0.75);
+	box-shadow:         4px 4px 6px rgba(50, 50, 50, 0.75);
+}
+
+.button {
+	color: rgb(230, 230, 230);
+	font-size: 18px;
+	padding: 5px;
+	text-shadow: 1px 2px 1px rgba(30, 30, 30, 0.8);
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	background: rgb(109,110,113);
+	-webkit-box-shadow: 0px 2px 1px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 2px 1px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 2px 1px rgba(50, 50, 50, 0.75);
+}
+
+.error {
+	background: none repeat scroll 0 0 red;
+    border: 1px solid;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.exito {
+	background: none repeat scroll 0 0 green;
+    border: 1px solid;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+#tituloLogin {
+	color: #FFF;
+	font-size: 16px;
+	font-weight: bold;
+	height: 38px;
+	display: inline-block;
+}
+
+#tituloLogin img {
+	display: inline-block;
+    left: -100px;
+    position: relative;
+}
+
+#tituloLogin span {
+	display: inline-block;
+    float: right;
+    position: relative;
+    top: -40px;
+    vertical-align: top;
+    width: 200px;
+}
+
+#menuAdmin {
+	width: 250px;
+	height: auto;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#mainContent {
+	width: 740px;
+	height: auto;
+	display: inline-block;
+}
+
+#mainContent input[type="text"], #mainContent input[type="password"], #mainContent input[type="email"], #txtTipoUsuario, #txtEstadoBusqueda, #txtEstado {
+	display: block;
+    font-size: 15px;
+    margin: 10px;
+    width: 300px;
+}
+
+#mainContent h3 {
+	border-bottom: 1px dashed #394053;
+    color: #394053;
+    text-transform: uppercase;
+}
+
+#buscador input[type="text"] {
+	display: inline-block;
+}
+
+#centrado {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#barraTituloAdmin {
+	display: inline-block;
+	width: 1000px;
+	vertical-align: top;
+	background: url("../images/bgBarraSuperior.jpg") repeat-x scroll 0 0 transparent;
+    box-shadow: 0 5px 5px #888888;
+    color: #FFFFFF;
+    font-weight: bold;
+    height: 49px;
+    position: relative;
+    z-index: 1;
+    top: -19px;
+}
+
+#divBienvenido {
+	display: inline-block;
+    left: 250px;
+    margin: 14px 5px;
+    position: relative;
+    text-align: right;
+    vertical-align: top;
+    width: 400px;
+}
+
+#logoRTV {
+	background: url("../images/logoRTVBarraSuperior.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 38px;
+    margin: 5px;
+    width: 102px;
+}
+
+#tituloSistema {
+	display: inline-block;
+    margin: 7px;
+    vertical-align: top;
+    width: 200px;
+}
+
+ul {
+	padding: 0 20px;
+}
+
+li {
+	line-height: 1.4em;
+    list-style-image: url("../images/arrow9px.png");
+    list-style-position: outside;
+}
+
+a {
+	color: #666666;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}

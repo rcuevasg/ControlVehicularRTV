@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
 	<title>Panel de Administraci&oacute;n | Sistema de Control Vehicular RTV</title>
 	
 	<LINK REL="StyleSheet"  HREF="../js/jquery-easyui-1/themes/bootstrap/easyui.css" TYPE="text/css" MEDIA="screen" />
+	<LINK REL="StyleSheet"  HREF="../js/jquery-easyui-1/themes/icon.css" TYPE="text/css" MEDIA="screen" />
+	<link rel="stylesheet" href="../css/style.css" media="screen" />
 	
 	<script type="text/javascript" src="../js/jquery-easyui-1/jquery-1.8.0.min.js"></script>
 	<script type="text/javascript" src="../js/jquery-easyui-1/jquery.easyui.min.js"></script>
@@ -13,7 +15,12 @@
 </head>
 
 <body>
-
+	<div id="centrado">
+	<div id="barraTituloAdmin">
+		<div id="logoRTV"></div>
+		<div id="tituloSistema">Sistema de Control Vehicular</div>
+		<div id="divBienvenido">Bienvenido <?php print $_SESSION['nombre']; ?> ( <a href="logout.php" style="color:white;">Terminar la sesi&oacute;n</a> )</div>
+	</div>
 	<?php
 	if (isset( $_SESSION['tipoUsuario'] ) ) {
 		//Existe sesion así que mostramos el menu
@@ -59,6 +66,6 @@
 		<?php
 	}
 	?>
-
+	</div>
 </body>
 </html>
