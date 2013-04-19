@@ -72,11 +72,33 @@
 					?>
 					</select>
 					<?php
-				endif;			
+				endif;	
+				
+				include_once("utilitiesChoferes.php");
+				$choferes = listaSimpleChoferes();
 				?>
+					<select name="txtChoferResguardo" id="txtChoferResguardo">
+						<option value="0">Elige el chofer que resguarda este veh&iacute;culo</option>
+						<?php
+				if (!empty($choferes)) :
+					
+						$listadoChoferes = explode("~", $choferes);
+						foreach ($listadoChoferes as $chofer) {
+							$datosChofer = explode("|", $chofer);
+							?>
+							<option value="<?php print $datosChofer[0] ?>"><?php print $datosChofer[1] ?></option>
+							<?php
+						}
+						
+				endif;
+				?>
+				
+					</select>
+				
 				<input type="text" name="txtNomUnidad" id="txtNomUnidad" placeholder="Nombre de la Unidad" >
 				<textarea name="txtDescripcion" id="txtDescripcion"  placeholder="Descripción" cols="80" rows="3"></textarea>
-				<button class="button" type="submit" value="Guardar usuario" >Guardar usuario</button>
+				
+				<button class="button" type="submit" value="Guardar vehiculo" >Guardar veh&iacute;culo</button>
 			</form>
 			<?php
 			break; //Fin del case 1

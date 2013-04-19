@@ -27,8 +27,9 @@ switch ($opt) {
 		$nom_unidad = $_POST['txtNomUnidad'];
 		$descripcion = $_POST['txtDescripcion'];
 		$usuario_creo = $_SESSION['idUsuario'];
+		$choferResguarda = $_POST['txtChoferResguardo'];
 		
-		$res = registraVehiculo($placas_viejas, $placas_nuevas, $marca, $modelo, $linea, $capacidad_tanque, $kilometraje_actual, $num_serie, $num_economico, $tipo_unidad, $tipo_combustible, $nom_unidad, $descripcion, $usuario_creo);
+		$res = registraVehiculo($placas_viejas, $placas_nuevas, $marca, $modelo, $linea, $capacidad_tanque, $kilometraje_actual, $num_serie, $num_economico, $tipo_unidad, $tipo_combustible, $nom_unidad, $descripcion, $usuario_creo, $choferResguarda);
 			
 		//Verificamos el exito del registro
 		if ($res > 0) {

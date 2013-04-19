@@ -2,35 +2,6 @@
 //Archivo para manejar las utilidades relacionadas con el catalogo de choferes
 
 /**
-*Funcion para loguear usuarios al sistema
-*@param string $username Nombre de logueo del usuario, es diferente de su correo electronico
-*@param string $passwd Contrasela del usuario
-*@return string Cadena vacia en caso de no existir el usuario, en caso contrario cadena con el siguiente formato: id|nombre completo|email|tipo de usuario
-*/
-function logueaUsuario($username, $passwd) {
-	$result = "";
-	include "connection.php";
-	
-	try {
-		$STH = $DBH->prepare("select id_tb_usuarios, concat(nombre,' ',ap_paterno,' ',ap_materno) as nombre, email, id_ctg_tipo_usuario from TB_USUARIOS where username = ? and passwd = MD5(?) and activo = true");
-		$STH->bindParam(1, $username);
-		$STH->bindParam(2, $passwd);
-		$STH->setFetchMode(PDO::FETCH_NUM);
-		$STH->execute();
-		
-		while ($row = $STH->fetch()) {
-			$result = $row[0] . "|" . $row[1] . "|" . $row[2] . "|" . $row[3];
-		}
-		
-	} catch (PDOException $ex) {
-		print $ex->getMessage();
-	}
-	
-	include "closeConnection.php";
-	return $result;
-}
-
-/**
 *Funcion para registrar un chofer del sistema
 *@param string $nombre Nombre del chofer
 *@param string $ap_paterno Apellido paterno del chofer
@@ -238,4 +209,28 @@ function desactivaChofer($idChofer, $usuario_modifico) {
 	include "closeConnection.php";
 	return $result;
 }
+
+/**
+*Funcion para obtener el listado de choferes activos y con licencias vigentes registrados
+*@return string id|nombre~id|nombre
+*/
+function listaSimpleChoferes(){
+	$result = "";
+	include "connection.php";
+	
+	try {
+		$STH = $DBH->prepare("select id_tb_choferes, concat(nombre, ' ', ap_paterno, ' ', ap_materno) as nombre from TB_CHOFERES where activo = true and vigencia_licencia > now() and id_tb_choferes not in (select chofer_resguarda from CTG_VEHICULOS)");
+		$STH->setFetchMode(PDO::FETCH_NUM);
+		$STH->execute();
+		while ($row = $STH->fetch()) {
+			$result .= $row[0] . "|" . $row[1] . "~";
+		}
+	} catch (PDOException $ex) {
+		print $ex->getMessage();
+	}
+	
+	include "closeConnection.php";
+	return substr($result, 0, strlen($result) - 1);	
+}
+
 ?>

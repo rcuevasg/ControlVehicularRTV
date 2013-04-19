@@ -99,9 +99,10 @@ function listadoTipoCombustible()
 *@param string $nom_unidad Nombre de la unidad que identifica el vehiculo
 *@param string $descripcion Descripción de las caracteristicas del vehiculo
 *@param integer $usuario_creo Identificador del usuario que esta creando al vehiculo
+*@param integer $choferResguarda Identificador del chofer que resgiarda el vehiculo
 *@result integer 0 en caso de error y 1 en caso de exito
 */
-function registraVehiculo($placas_viejas, $placas_nuevas, $marca, $modelo, $linea, $capacidad_tanque, $kilometraje_actual, $num_serie, $num_economico, $tipo_unidad, $tipo_combustible, $nom_unidad, $descripcion, $usuario_creo)
+function registraVehiculo($placas_viejas, $placas_nuevas, $marca, $modelo, $linea, $capacidad_tanque, $kilometraje_actual, $num_serie, $num_economico, $tipo_unidad, $tipo_combustible, $nom_unidad, $descripcion, $usuario_creo, $choferResguarda)
 {
 	$result = 0;
 	include "connection.php";
@@ -109,7 +110,7 @@ function registraVehiculo($placas_viejas, $placas_nuevas, $marca, $modelo, $line
 	try {
 		$STH = $DBH->prepare("insert into CTG_VEHICULOS (placas_viejas, placas_nuevas, marca, modelo, capacidad_tanque, kilometraje_actual,  
 		nombre_unidad, linea, descripcion_vehiculo, num_serie, id_ctg_tipo_unidad, id_ctg_tipo_combustible, usuario_creo, 
-		usuario_modifico, num_economico, fecha_creado, fecha_modificado, activo) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now(), true)");
+		usuario_modifico, num_economico, fecha_creado, fecha_modificado, activo, chofer_resguarda) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now(), true, ?)");
 		$STH->bindParam(1, $placas_viejas);
 		$STH->bindParam(2, $placas_nuevas);
 		$STH->bindParam(3, $marca);
@@ -124,7 +125,8 @@ function registraVehiculo($placas_viejas, $placas_nuevas, $marca, $modelo, $line
 		$STH->bindParam(12, $tipo_combustible);
 		$STH->bindParam(13, $usuario_creo);
 		$STH->bindParam(14, $usuario_creo);
-		$STH->bindParam(15, $num_economico);		
+		$STH->bindParam(15, $num_economico);
+		$STH->bindParam(16, $choferResguarda);		
 		$STH->execute();
 		$result = $STH->rowCount();
 		//$STH->bindParam(11, $num_motor);
