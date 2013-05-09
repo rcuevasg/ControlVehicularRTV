@@ -73,8 +73,9 @@ switch ($opt) {
 		$descripcion = $_POST['txtDescripcion'];
 		$usuario_modifco = $_SESSION['idUsuario'];
 		$activo = $_POST['txtEstado'];
+		$choferResguarda = $_POST['txtChoferResguardo'];
 		
-		$res = actualizaVehiculos($placas_viejas, $placas_nuevas, $marca, $modelo, $linea, $capacidad_tanque, $kilometraje_actual, $num_serie, $num_economico, $tipo_unidad, $tipo_combustible, $nom_unidad, $descripcion, $usuario_modifico, $idVehiculo, $activo);
+		$res = actualizaVehiculos($placas_viejas, $placas_nuevas, $marca, $modelo, $linea, $capacidad_tanque, $kilometraje_actual, $num_serie, $num_economico, $tipo_unidad, $tipo_combustible, $nom_unidad, $descripcion, $usuario_modifico, $idVehiculo, $activo, $choferResguarda);
 			
 		//Verificamos el exito del registro
 		if ($res > 0) {

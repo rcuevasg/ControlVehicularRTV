@@ -269,7 +269,32 @@
 					</select>
 					<?php
 				endif;			
+				
+				//Chofer resguardando vehiculo
+				include_once("utilitiesChoferes.php");
+				$choferes = listaSimpleChoferes();
+				$chofeResguardando = obtenDatosChofer($datosVehiculo[14]);
+				$datosChoferResguardando = explode("|", $chofeResguardando);
 				?>
+					<label>Chofer resguardando: <?php print $datosChoferResguardando[0] . " " . $datosChoferResguardando[1] . " " . $datosChoferResguardando[2] ?>. Cambiar por: </label>
+					<select name="txtChoferResguardo" id="txtChoferResguardo">
+						<option value="0">Elige el chofer que resguarda este veh&iacute;culo</option>
+						<?php
+				if (!empty($choferes)) :
+					
+						$listadoChoferes = explode("~", $choferes);
+						foreach ($listadoChoferes as $chofer) {
+							$datosChofer = explode("|", $chofer);
+							?>
+							<option value="<?php print $datosChofer[0] ?>"><?php print $datosChofer[1] ?></option>
+							<?php
+						}
+						
+				endif;
+				?>
+				
+					</select> <!-- #txtChoferResguardo -->
+					
 				<input type="text" name="txtNomUnidad" id="txtNomUnidad" placeholder="Nombre de la Unidad"  value="<?php print $datosVehiculo[6]; ?>">
 				<textarea name="txtDescripcion" id="txtDescripcion"  placeholder="Descripción" cols="80" rows="3"><?php print $datosVehiculo[8]; ?></textarea>
 

@@ -242,13 +242,13 @@ function obtenDatosVehiculo($id)
 	include "connection.php";
 	
 	try {
-		$STH = $DBH->prepare("select placas_viejas, placas_nuevas, marca, modelo, capacidad_tanque, kilometraje_actual, nombre_unidad, linea, descripcion_vehiculo, num_serie, id_ctg_tipo_unidad, id_ctg_tipo_combustible, num_economico, activo from CTG_VEHICULOS where id_ctg_vehiculos = ?");
+		$STH = $DBH->prepare("select placas_viejas, placas_nuevas, marca, modelo, capacidad_tanque, kilometraje_actual, nombre_unidad, linea, descripcion_vehiculo, num_serie, id_ctg_tipo_unidad, id_ctg_tipo_combustible, num_economico, activo, chofer_resguarda from CTG_VEHICULOS where id_ctg_vehiculos = ?");
 		$STH->bindParam(1, $id);
 		$STH->setFetchMode(PDO::FETCH_NUM);
 		$STH->execute();
 		
 		while ($row = $STH->fetch()) {
-			$result .= $row[0] . "|" . $row[1] . "|" . $row[2] . "|" . $row[3] . "|" . $row[4] . "|" . $row[5] . "|" . $row[6]. "|" . $row[7]. "|" . $row[8]. "|" . $row[9]. "|" . $row[10]. "|" . $row[11]. "|" . $row[12]. "|" . $row[13]  ;
+			$result .= $row[0] . "|" . $row[1] . "|" . $row[2] . "|" . $row[3] . "|" . $row[4] . "|" . $row[5] . "|" . $row[6]. "|" . $row[7]. "|" . $row[8]. "|" . $row[9]. "|" . $row[10]. "|" . $row[11]. "|" . $row[12]. "|" . $row[13] . "|" . $row[14]  ;
 		}
 		
 	} catch (PDOException $ex) {
@@ -279,7 +279,7 @@ function obtenDatosVehiculo($id)
 *@param integer $activo Estado del vehiculo 0 para inactivo y 1 para activo
 *@return integer 0 en caso de error y 1 en caso de exito
 */
-function actualizaVehiculos($placas_viejas, $placas_nuevas, $marca, $modelo, $linea, $capacidad_tanque, $kilometraje_actual, $num_serie, $num_economico, $tipo_unidad, $tipo_combustible, $nom_unidad, $descripcion, $usuario_modifico, $idVehiculo, $activo) 
+function actualizaVehiculos($placas_viejas, $placas_nuevas, $marca, $modelo, $linea, $capacidad_tanque, $kilometraje_actual, $num_serie, $num_economico, $tipo_unidad, $tipo_combustible, $nom_unidad, $descripcion, $usuario_modifico, $idVehiculo, $activo, $choferResguarda) 
 {
 	$result = 0;
 	include "connection.php";
@@ -288,7 +288,7 @@ function actualizaVehiculos($placas_viejas, $placas_nuevas, $marca, $modelo, $li
 		//La contraseña viene vacia por lo que no se actualiza el campo
 		$STH = $DBH->prepare("update CTG_VEHICULOS set placas_viejas = ?, placas_nuevas = ?, marca = ?, modelo = ?, capacidad_tanque = ?, 
 		kilometraje_actual = ?, nombre_unidad = ?,  linea = ?, descripcion_vehiculo = ?, num_serie = ?, id_ctg_tipo_unidad = ?, id_ctg_tipo_combustible = ?, 
-		num_economico = ?, fecha_modificado = now(), usuario_modifico = ?, activo = ? 
+		num_economico = ?, fecha_modificado = now(), usuario_modifico = ?, activo = ?, chofer_resguarda = ?  
 		where id_ctg_vehiculos = ?");
 		$STH->bindParam(1, $placas_viejas);
 		$STH->bindParam(2, $placas_nuevas);
@@ -305,7 +305,8 @@ function actualizaVehiculos($placas_viejas, $placas_nuevas, $marca, $modelo, $li
 		$STH->bindParam(13, $num_economico);	
 		$STH->bindParam(14, $usuario_modifico);
 		$STH->bindParam(15, $activo);	
-		$STH->bindParam(16, $idVehiculo);	
+		$STH->bindParam(16, $choferResguarda);
+		$STH->bindParam(17, $idVehiculo);	
 		$STH->execute();	
 		$result = $STH->rowCount();
 		
