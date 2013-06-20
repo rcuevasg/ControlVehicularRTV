@@ -22,7 +22,7 @@
 		<div id="divBienvenido">Bienvenido <?php print $_SESSION['nombre']; ?> ( <a href="logout.php" style="color:white;">Terminar la sesi&oacute;n</a> )</div>
 	</div>
 	<?php
-	if (isset( $_SESSION['tipoUsuario'] ) ) {
+	if (isset( $_SESSION['tipoUsuario'] ) && ($_SESSION['tipoUsuario'] == 1) ) {
 		//Existe sesion así que mostramos el menu
 		?>
 		<div id="menuAdmin">
@@ -59,6 +59,14 @@
 		
 		<div id="mainContent"></div>
 		<?php
+	} elseif (isset( $_SESSION['tipoUsuario'] ) && ($_SESSION['tipoUsuario'] == 2)) {
+	?>
+		<button class="button btnMobile" type="button" value="Registrar salida" onclick="document.location = 'index.php';" >Inicio</button>
+		<div id="mainContentRegistro">
+		<button id="btnRegistraSalida" class="button" type="button" value="Registrar salida" onclick="$('#mainContentRegistro').load('salidasEntradas.php?opt=1')" >Registrar salida</button>
+		<button id="btnRegistraEntrada" class="button" type="button" value="Registrar entrada" onclick="$('#mainContentRegistro').load('salidasEntradas.php?opt=2')" >Registrar entrada</button>
+		</div> <!-- #mainContent -->
+	<?php
 	} else {
 		//La sesion no existe por lo que mostramos un mensaje indicando que no hay acceso al panel
 		?>

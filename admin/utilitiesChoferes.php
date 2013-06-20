@@ -219,7 +219,7 @@ function listaSimpleChoferes(){
 	include "connection.php";
 	
 	try {
-		$STH = $DBH->prepare("select id_tb_choferes, concat(nombre, ' ', ap_paterno, ' ', ap_materno) as nombre from TB_CHOFERES where activo = true and vigencia_licencia > now() and id_tb_choferes not in (select chofer_resguarda from CTG_VEHICULOS)");
+		$STH = $DBH->prepare("select id_tb_choferes, concat(nombre, ' ', ap_paterno, ' ', ap_materno) as nombre from TB_CHOFERES where activo = true and vigencia_licencia > now() and id_tb_choferes not in (select ts.id_tb_choferes from TB_SALIDA as ts where ts.activo = true) ");
 		$STH->setFetchMode(PDO::FETCH_NUM);
 		$STH->execute();
 		while ($row = $STH->fetch()) {

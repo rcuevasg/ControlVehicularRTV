@@ -178,3 +178,110 @@ a {
 a:hover {
 	text-decoration: underline;
 }
+
+/* Clases móviles */
+
+#btnRegistraSalida {
+	display: block;
+    font-size: 35px;
+    height: 80px;
+    margin: 30px auto;
+    width: 50%;
+}
+
+#btnRegistraEntrada {
+	display: block;
+    font-size: 35px;
+    height: 80px;
+    margin: 30px auto;
+    width: 50%;
+}
+
+#mainContentRegistro input[type="text"], #mainContentRegistro input[type="number"], #mainContentRegistro input[type="date"], #mainContentRegistro input[type="range"], #mainContentRegistro input[type="time"], #mainContentRegistro #txtVehiculoSale, #mainContentRegistro #txtChoferes, #mainContentRegistro #txtTipoSalida, #mainContentRegistro #txtActividadComision {
+	display: block;
+    font-size: 35px;
+    margin: 10px auto;
+    width: 50%;
+    height: 80px;
+}
+
+#mainContentRegistro label {
+	font-size: 30px;
+	font-weight: bold;
+	margin-left: 10%;
+}
+
+#mainContentRegistro h3 {
+	font-size: 35px;
+	font-weight: bold;
+}
+
+#mainContentRegistro input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 44px; height: 44px;
+  background: #fdfdfd; background: -moz-linear-gradient(top, #fdfdfd 0%, #bebebe 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdfdfd), color-stop(100%,#bebebe)); background: -webkit-linear-gradient(top, #fdfdfd 0%,#bebebe 100%); background: -o-linear-gradient(top, #fdfdfd 0%,#bebebe 100%); background: -ms-linear-gradient(top, #fdfdfd 0%,#bebebe 100%); background: linear-gradient(to bottom, #fdfdfd 0%,#bebebe 100%);
+  border: 1px solid #bbb;
+  -webkit-border-radius: 22px; -moz-border-radius: 22px; border-radius: 22px;
+}
+
+fieldset {
+	font-size: 30px;
+	font-weight: bold;
+	width: 80%;
+	margin: 10px auto;
+}
+
+#mainContentRegistro input[type=checkbox] {
+	width: 44px; height: 44px;
+	-webkit-border-radius: 22px; -moz-border-radius: 22px; border-radius: 22px;
+	border: 1px solid #bbb;
+}
+
+#btnGuardaRegistroSalida {
+	display: block;
+    font-size: 35px;
+    height: 80px;
+    margin: 30px auto;
+    width: 50%;
+}
+
+.btnMobile {
+	display: block;
+    font-size: 35px;
+    height: 80px;
+    margin: 30px auto;
+    width: 50%;
+}
+
+.mobile {
+	width: 50%;
+	height: 50%;
+	font-size: 50px;
+	font-weight: bold;
+	margin: 50% auto;
+	text-align: center;
+	padding: 20px;
+}
+
+.itemComision {
+	border-bottom: 3px dashed #CCCCCC;
+	width: 80%;
+	margin: 0 auto;
+	/*height: 200px;*/
+}
+
+.itemComision .mobile {
+	margin: 10px 10%;
+	width: 80%;
+}
+
+.itemInfo {
+	font-size: 20px;
+    margin: 10px;
+}
+
+.itemInfo span {
+	display: block;
+}
+
+/* Fin de las clases móviles */

@@ -343,4 +343,29 @@ function desactivaVehiculo($idVehiculo, $usuario_modifico)
 	include "closeConnection.php";
 	return $result;
 }
+
+
+/**
+*Funcion para obtener el listado de vehiculos activos sólo con id y nombre de la unidad
+*@return Cadena vacía en caso de no haber vehiculos activos, si no regresa una cadena con la forma: id|nombreUnidad~id|nombreUnidad
+*/
+function listaNombresVehiculos() {
+	$result = "";
+	include "connection.php";
+	
+	try {
+		$STH = $DBH->prepare("select id_ctg_vehiculos, CONCAT(nombre_unidad,' (',placas_nuevas,')') as nombre from CTG_VEHICULOS where activo = true and id_ctg_vehiculos  not in (select ts.id_ctg_vehiculos from TB_SALIDA as ts where activo = true)");
+		$STH->setFetchMode(PDO::FETCH_NUM);
+		$STH->execute();
+		while ($row = $STH->fetch()) {
+			$result .= $row[0] . "|" . $row[1] . "~";
+		}
+	} catch (PDOException $ex) {
+		print $ex->getMessage();
+	}
+	
+	include "closeConnection.php";
+	return substr($result, 0, strlen($result) - 1);
+}
+
 ?>

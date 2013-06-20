@@ -27,7 +27,7 @@ switch ($opt) {
 		$nom_unidad = $_POST['txtNomUnidad'];
 		$descripcion = $_POST['txtDescripcion'];
 		$usuario_creo = $_SESSION['idUsuario'];
-		$choferResguarda = $_POST['txtChoferResguardo'];
+		$choferResguarda = 0;//$_POST['txtChoferResguardo'];
 		
 		$res = registraVehiculo($placas_viejas, $placas_nuevas, $marca, $modelo, $linea, $capacidad_tanque, $kilometraje_actual, $num_serie, $num_economico, $tipo_unidad, $tipo_combustible, $nom_unidad, $descripcion, $usuario_creo, $choferResguarda);
 			
@@ -73,7 +73,7 @@ switch ($opt) {
 		$descripcion = $_POST['txtDescripcion'];
 		$usuario_modifco = $_SESSION['idUsuario'];
 		$activo = $_POST['txtEstado'];
-		$choferResguarda = $_POST['txtChoferResguardo'];
+		$choferResguarda = 0;//$_POST['txtChoferResguardo'];
 		
 		$res = actualizaVehiculos($placas_viejas, $placas_nuevas, $marca, $modelo, $linea, $capacidad_tanque, $kilometraje_actual, $num_serie, $num_economico, $tipo_unidad, $tipo_combustible, $nom_unidad, $descripcion, $usuario_modifico, $idVehiculo, $activo, $choferResguarda);
 			
