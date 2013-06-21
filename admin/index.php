@@ -33,6 +33,12 @@
 						<li><a href="#" onclick="$('#mainContent').load('usuarios.php?opt=1')" >Agregar usuario</a></li>
 					</ul>
 				</div>  
+				<div title="Tipos de Comision"   >  
+					<ul>
+						<li><a href="#" onclick="$('#mainContent').load('actividadComision.php?opt=2')" >Actividades de comisi&oacute;n</a></li>
+						<li><a href="#" onclick="$('#mainContent').load('actividadComision.php?opt=1')" >Agregar actividad</a></li>
+					</ul>
+				</div>  
 				<div title="Choferes" >  
 					<ul>
 						<li><a href="#" onclick="$('#mainContent').load('choferes.php?opt=2')" >Listado de choferes</li>

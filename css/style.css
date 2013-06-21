@@ -98,7 +98,7 @@ body {
 	display: inline-block;
 }
 
-#mainContent input[type="text"], #mainContent input[type="password"], #mainContent input[type="email"], #txtTipoUsuario, #txtEstadoBusqueda, #txtEstado, #txtTipoUnidad, #txtTipoCombustible, #txtChoferResguardo {
+#mainContent input[type="text"], #mainContent input[type="password"], #mainContent input[type="email"], #txtTipoUsuario, #txtEstadoBusqueda, #txtEstado, #txtTipoUnidad, #txtTipoCombustible, #txtChoferResguardo, #mainContent #txtActivo {
 	display: block;
     font-size: 15px;
     margin: 10px;
