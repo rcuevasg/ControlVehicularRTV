@@ -197,7 +197,7 @@ a:hover {
     width: 50%;
 }
 
-#mainContentRegistro input[type="text"], #mainContentRegistro input[type="number"], #mainContentRegistro input[type="date"], #mainContentRegistro input[type="range"], #mainContentRegistro input[type="time"], #mainContentRegistro #txtVehiculoSale, #mainContentRegistro #txtChoferes, #mainContentRegistro #txtTipoSalida, #mainContentRegistro #txtActividadComision {
+#mainContentRegistro input[type="text"], #mainContentRegistro input[type="number"], #mainContentRegistro input[type="date"], #mainContentRegistro input[type="range"], #mainContentRegistro input[type="time"], #mainContentRegistro #txtVehiculoSale, #mainContentRegistro #txtChoferes, #mainContentRegistro #txtTipoSalida, #mainContentRegistro #txtActividadComision, #mainContentRegistro #txtLugarComision {
 	display: block;
     font-size: 35px;
     margin: 10px auto;

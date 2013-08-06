@@ -55,7 +55,7 @@
 				$vehiculos = listaNombresVehiculos();
 				?>
 				<label  for="txtVehiculoSale">Vehiculo asignado</label>
-				<select name="txtVehiculoSale" id="txtVehiculoSale" >
+				<select name="txtVehiculoSale" id="txtVehiculoSale" required >
 					<?php 
 					if (!empty($vehiculos)) {
 						$listaVehiculos = explode("~", $vehiculos);
@@ -73,7 +73,7 @@
 				$choferes = listaSimpleChoferes();
 				?>
 				<label  for="txtChoferes">Chofer asignado</label>
-				<select name="txtChoferes" id="txtChoferes" onchange="otroChofer()">
+				<select name="txtChoferes" id="txtChoferes" onchange="otroChofer()" required>
 				<option value="0">Otro</option>
 					<?php
 					if (!empty($choferes)) {
@@ -129,38 +129,62 @@
 				<input type="text" name="txtActividadComisionOtro" id="txtActividadComisionOtro">
 				
 				<label for="txtLugarComision">Destino de la comisión</label>
-				<input type="text" name="txtLugarComision" id="txtLugarComision">
+				<?php
+				include "utilitiesDestinosFrecuentes.php";
+				$destinos = obtenDestinosfrecuentes();
+				if (!empty($destinos)){
+					?>
+					<select name="txtLugarComision" id="txtLugarComision">
+					<?php
+						$listaDestinos = explode("~", $destinos);
+						foreach($listaDestinos as $destino){
+							$datosDestino = explode("|", $destino);
+							?>
+							<option value="<?php print $datosDestino[0] ?>"><?php print $datosDestino[1] ?></option>
+							<?php
+						}
+					?>
+					</select>
+					<?php
+				}
+				?>
+				<!-- <input type="text" name="txtLugarComision" id="txtLugarComision"> -->
 				
 				<label for="txtEncargadoComision">Responsable de la comisión</label>
-				<input type="text" name="txtEncargadoComision" id="txtEncargadoComision">
+				<input type="text" name="txtEncargadoComision" id="txtEncargadoComision" required="required">
 				
 				<label for="txtHoraComision">Hora programada</label>
-				<input type="time" name="txtHoraComision" id="txtHoraComision">
+				<input type="time" name="txtHoraComision" id="txtHoraComision" required="required">
 				
 				<label for="txtNumPasajeros">Número de pasajeros</label>
-				<input type="number" name="txtNumPasajeros" id="txtNumPasajeros">
+				<input type="number" name="txtNumPasajeros" id="txtNumPasajeros" required="required">
 				
 				<label for="txtKMSalida">Km de salida</label>
-				<input type="number" name="txtKMSalida" id="txtKMSalida">
+				<input type="number" name="txtKMSalida" id="txtKMSalida" required="required">
 				
 				<label for="txtObservaciones">Observaciones</label><br />
-				<center><textarea name="txtObservaciones" id="txtObservaciones" cols="60" rows="10" style="font-size:20px;"></textarea></center>
+				<center><textarea name="txtObservaciones" id="txtObservaciones" cols="60" rows="10" style="font-size:20px;" required="required"></textarea></center>
 				</fieldset>
 				
 				<fieldset >
 				<legend >Niveles del vehiculo</legend>
 				<label id="labeltxtNivelGasolina"  for="txtNivelGasolina">Nivel de gasolina</label>
-				<input type="range" name="txtNivelGasolina" id="txtNivelGasolina" min="1" max="100" step="1" onchange="changeSlider('Nivel de gasolina','txtNivelGasolina');">
-				<label id="labeltxtNivelAceiteMotor"  for="txtNivelAceiteMotor">Nivel de aceite del motor</label>
-				<input type="range" name="txtNivelAceiteMotor" id="txtNivelAceiteMotor" min="1" max="100" step="1" onchange="changeSlider('Nivel de aceite del motor','txtNivelAceiteMotor');">
-				<label id="labeltxtNivelAceiteTransmision"  for="txtNivelAceiteTransmision">Nivel de aceite de la transmisi&oacute;n</label>
-				<input type="range" name="txtNivelAceiteTransmision" id="txtNivelAceiteTransmision" min="1" max="100" step="1" onchange="changeSlider('Nivel de aceite de la transmisión','txtNivelAceiteTransmision');">
-				<label id="labeltxtNivelAceiteDireccion" for="txtNivelAceiteDireccion">Nivel de aceite de la direcci&oacute;n</label>
-				<input type="range" name="txtNivelAceiteDireccion" id="txtNivelAceiteDireccion" min="1" max="100" step="1" onchange="changeSlider('Nivel de aceite de la dirección','txtNivelAceiteDireccion');">
-				<label id="labeltxtNivelLiquidoFrenos"  for="txtNivelLiquidoFrenos">Nivel de liquido de frenos</label>
-				<input type="range" name="txtNivelLiquidoFrenos" id="txtNivelLiquidoFrenos" min="1" max="100" step="1" onchange="changeSlider('Nivel de liquido de frenos','txtNivelLiquidoFrenos');">
-				<label id="labeltxtNivelLiquidoAnticongelante" for="txtNivelLiquidoAnticongelante">Nivel de liquido anticongelante</label>
-				<input type="range" name="txtNivelLiquidoAnticongelante" id="txtNivelLiquidoAnticongelante" min="1" max="100" step="1" onchange="changeSlider('Nivel de liquido anticongelante','txtNivelLiquidoAnticongelante');">
+				<input type="range" name="txtNivelGasolina" id="txtNivelGasolina" min="0" max="100" step="5" onchange="changeSlider('Nivel de gasolina','txtNivelGasolina');">
+				<input type="checkbox" name="txtNivelAceiteMotor" id="txtNivelAceiteMotor" value="1">Nivel de aceite del motor <br/>
+				<!-- <label id="labeltxtNivelAceiteMotor"  for="txtNivelAceiteMotor">Nivel de aceite del motor</label>
+				<input type="range" name="txtNivelAceiteMotor" id="txtNivelAceiteMotor" min="1" max="100" step="1" onchange="changeSlider('Nivel de aceite del motor','txtNivelAceiteMotor');"> -->
+				<input type="checkbox" name="txtNivelAceiteTransmision" id="txtNivelAceiteTransmision" value="1">Nivel de aceite de la transmisi&oacute;n<br/>
+				<!-- <label id="labeltxtNivelAceiteTransmision"  for="txtNivelAceiteTransmision">Nivel de aceite de la transmisi&oacute;n</label>
+				<input type="range" name="txtNivelAceiteTransmision" id="txtNivelAceiteTransmision" min="1" max="100" step="1" onchange="changeSlider('Nivel de aceite de la transmisión','txtNivelAceiteTransmision');"> -->
+				<input type="checkbox" name="txtNivelAceiteDireccion" id="txtNivelAceiteDireccion" value="1">Nivel de aceite de la direcci&oacute;n<br/>
+				<!-- <label id="labeltxtNivelAceiteDireccion" for="txtNivelAceiteDireccion">Nivel de aceite de la direcci&oacute;n</label>
+				<input type="range" name="txtNivelAceiteDireccion" id="txtNivelAceiteDireccion" min="1" max="100" step="1" onchange="changeSlider('Nivel de aceite de la dirección','txtNivelAceiteDireccion');"> -->
+				<input type="checkbox" name="txtNivelLiquidoFrenos" id="txtNivelLiquidoFrenos" value="1">Nivel de liquido de frenos<br/>
+				<!-- <label id="labeltxtNivelLiquidoFrenos"  for="txtNivelLiquidoFrenos">Nivel de liquido de frenos</label>
+				<input type="range" name="txtNivelLiquidoFrenos" id="txtNivelLiquidoFrenos" min="1" max="100" step="1" onchange="changeSlider('Nivel de liquido de frenos','txtNivelLiquidoFrenos');"> -->
+				<input type="checkbox" name="txtNivelLiquidoAnticongelante" id="txtNivelLiquidoAnticongelante" value="1">Nivel de liquido anticongelante
+				<!-- <label id="labeltxtNivelLiquidoAnticongelante" for="txtNivelLiquidoAnticongelante">Nivel de liquido anticongelante</label>
+				<input type="range" name="txtNivelLiquidoAnticongelante" id="txtNivelLiquidoAnticongelante" min="1" max="100" step="1" onchange="changeSlider('Nivel de liquido anticongelante','txtNivelLiquidoAnticongelante');"> -->
 				</fieldset>
 				
 				<fieldset >
@@ -289,8 +313,8 @@
 				<fieldset >
 				<legend >Niveles del vehiculo</legend>
 				<label id="labeltxtNivelGasolina"  for="txtNivelGasolina">Nivel de gasolina</label>
-				<input type="range" name="txtNivelGasolina" id="txtNivelGasolina" min="1" max="100" step="1" onchange="changeSlider('Nivel de gasolina','txtNivelGasolina');">
-				<label id="labeltxtNivelAceiteMotor"  for="txtNivelAceiteMotor">Nivel de aceite del motor</label>
+				<input type="range" name="txtNivelGasolina" id="txtNivelGasolina" min="0" max="100" step="5" onchange="changeSlider('Nivel de gasolina','txtNivelGasolina');">
+				<!-- <label id="labeltxtNivelAceiteMotor"  for="txtNivelAceiteMotor">Nivel de aceite del motor</label>
 				<input type="range" name="txtNivelAceiteMotor" id="txtNivelAceiteMotor" min="1" max="100" step="1" onchange="changeSlider('Nivel de aceite del motor','txtNivelAceiteMotor');">
 				<label id="labeltxtNivelAceiteTransmision"  for="txtNivelAceiteTransmision">Nivel de aceite de la transmisi&oacute;n</label>
 				<input type="range" name="txtNivelAceiteTransmision" id="txtNivelAceiteTransmision" min="1" max="100" step="1" onchange="changeSlider('Nivel de aceite de la transmisión','txtNivelAceiteTransmision');">
@@ -299,7 +323,7 @@
 				<label id="labeltxtNivelLiquidoFrenos"  for="txtNivelLiquidoFrenos">Nivel de liquido de frenos</label>
 				<input type="range" name="txtNivelLiquidoFrenos" id="txtNivelLiquidoFrenos" min="1" max="100" step="1" onchange="changeSlider('Nivel de liquido de frenos','txtNivelLiquidoFrenos');">
 				<label id="labeltxtNivelLiquidoAnticongelante" for="txtNivelLiquidoAnticongelante">Nivel de liquido anticongelante</label>
-				<input type="range" name="txtNivelLiquidoAnticongelante" id="txtNivelLiquidoAnticongelante" min="1" max="100" step="1" onchange="changeSlider('Nivel de liquido anticongelante','txtNivelLiquidoAnticongelante');">
+				<input type="range" name="txtNivelLiquidoAnticongelante" id="txtNivelLiquidoAnticongelante" min="1" max="100" step="1" onchange="changeSlider('Nivel de liquido anticongelante','txtNivelLiquidoAnticongelante');"> -->
 				</fieldset>
 				
 				<fieldset >

@@ -33,11 +33,26 @@ switch ($opt) {
 		$txtKMSalida = $_POST["txtKMSalida"];
 		$txtObservaciones = $_POST["txtObservaciones"];
 		$txtNivelGasolina = $_POST["txtNivelGasolina"];
-		$txtNivelAceiteMotor = $_POST["txtNivelAceiteMotor"];
-		$txtNivelAceiteTransmision = $_POST["txtNivelAceiteTransmision"];
-		$txtNivelAceiteDireccion = $_POST["txtNivelAceiteDireccion"];
-		$txtNivelLiquidoFrenos = $_POST["txtNivelLiquidoFrenos"];
-		$txtNivelLiquidoAnticongelante = $_POST["txtNivelLiquidoAnticongelante"];
+		$txtNivelAceiteMotor = 0;
+		if (isset($_POST["txtNivelAceiteMotor"]))
+			$txtNivelAceiteMotor = $_POST["txtNivelAceiteMotor"];
+		
+		$txtNivelAceiteTransmision = 0;	
+		if (isset($_POST["txtNivelAceiteTransmision"]))
+			$txtNivelAceiteTransmision = $_POST["txtNivelAceiteTransmision"];
+			
+		$txtNivelAceiteDireccion = 0;
+		if (isset($_POST["txtNivelAceiteDireccion"]))
+			$txtNivelAceiteDireccion = $_POST["txtNivelAceiteDireccion"];
+			
+		$txtNivelLiquidoFrenos = 0;	
+		if (isset($_POST["txtNivelLiquidoFrenos"]))
+			$txtNivelLiquidoFrenos = $_POST["txtNivelLiquidoFrenos"];
+			
+		$txtNivelLiquidoAnticongelante = 0;
+		if (isset($_POST["txtNivelLiquidoAnticongelante"]))
+			$txtNivelLiquidoAnticongelante = $_POST["txtNivelLiquidoAnticongelante"];
+			
 		$llantaRefaccion = "0";
 		if (isset($_POST["llantaRefaccion"]))
 			$llantaRefaccion = $_POST["llantaRefaccion"];
@@ -112,10 +127,10 @@ switch ($opt) {
 		if (isset($_POST["llaveCruz"]))
 			$llaveCruz = $_POST["llaveCruz"];
 		$ESTADO_LLANTAS = ""; 
-		$NIVEL_LIQUIDO_ANTICONGELANTE = $_POST['txtNivelLiquidoAnticongelante']; 
+		/*$NIVEL_LIQUIDO_ANTICONGELANTE = $_POST['txtNivelLiquidoAnticongelante']; 
 		$NIVEL_LIQUIDO_FRENOS = $_POST['txtNivelLiquidoFrenos']; 
 		$NIVEL_ACEITE_DIRECCION = $_POST['txtNivelAceiteDireccion']; 
-		$NIVEL_ACEITE_TRANSMISION = $_POST['txtNivelAceiteTransmision']; 
+		$NIVEL_ACEITE_TRANSMISION = $_POST['txtNivelAceiteTransmision']; */
 		$NIVEL_GASOLINA = $_POST['txtNivelGasolina']; 
 		$USUARIO_CREO = $_SESSION["idUsuario"]; 
 		$USUARIO_MODIFICO = $_SESSION["idUsuario"]; 
@@ -126,7 +141,7 @@ switch ($opt) {
 			$FACTURA = "1";
 		}
 		
-		$res = registraEntrada($KM_ENTRADA, $NIVEL_ACEITE_MOTOR, $OBSERVACIONES, $llaveCruz, $gato, $llantaRefaccion, $ESTADO_LLANTAS, $NIVEL_LIQUIDO_ANTICONGELANTE, $NIVEL_LIQUIDO_FRENOS, $NIVEL_ACEITE_DIRECCION, $NIVEL_ACEITE_TRANSMISION, $NIVEL_GASOLINA, $USUARIO_CREO, $USUARIO_MODIFICO, $FACTURA, $id_tb_salida);
+		$res = registraEntrada($KM_ENTRADA, /*$NIVEL_ACEITE_MOTOR,*/ $OBSERVACIONES, $llaveCruz, $gato, $llantaRefaccion, $ESTADO_LLANTAS, /*$NIVEL_LIQUIDO_ANTICONGELANTE, $NIVEL_LIQUIDO_FRENOS, $NIVEL_ACEITE_DIRECCION, $NIVEL_ACEITE_TRANSMISION,*/ $NIVEL_GASOLINA, $USUARIO_CREO, $USUARIO_MODIFICO, $FACTURA, $id_tb_salida);
 		
 		//Verificamos el exito del registro
 		if ($res > 0) {
