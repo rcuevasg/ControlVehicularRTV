@@ -27,6 +27,28 @@
 					}
 					//alert(strUser);
 				}
+				
+				function otroLugarComision(){
+					var e = document.getElementById("txtLugarComision");
+					var strUser = e.options[e.selectedIndex].value;
+					if (strUser == "0") {
+						document.getElementById('otroLugarComision').style.display = 'block';
+					} else {
+						document.getElementById('otroLugarComision').style.display = 'none';
+					}
+				}
+				
+				function cambioTipoSalida(){
+					var e = document.getElementById("txtTipoSalida");
+					var strUser = e.options[e.selectedIndex].value;
+					if (strUser == "0") {
+						document.getElementById('foraneo').style.display = 'none';
+						document.getElementById('local').style.display = 'block';
+					} else {
+						document.getElementById('foraneo').style.display = 'block';
+						document.getElementById('local').style.display = 'none';
+					}
+				}
 			
 				$(function(){
 					$('#frmRegistraSalida').form({
@@ -100,7 +122,7 @@
 				</div>
 				
 				<label  for="txtTipoSalida">Tipo de salida</label>
-				<select name="txtTipoSalida" id="txtTipoSalida">
+				<select name="txtTipoSalida" id="txtTipoSalida" onchange="cambioTipoSalida()">
 					<option value="0">Local</option>
 					<option value="1">Foranea</option>
 				</select>
@@ -129,12 +151,14 @@
 				<input type="text" name="txtActividadComisionOtro" id="txtActividadComisionOtro">
 				
 				<label for="txtLugarComision">Destino de la comisión</label>
+				<div id="foraneo" style="display:none;">
 				<?php
 				include "utilitiesDestinosFrecuentes.php";
 				$destinos = obtenDestinosfrecuentes();
 				if (!empty($destinos)){
 					?>
-					<select name="txtLugarComision" id="txtLugarComision">
+					<select name="txtLugarComision" id="txtLugarComision" onchange="otroLugarComision()">
+						<option value="0">Otro destino</option>
 					<?php
 						$listaDestinos = explode("~", $destinos);
 						foreach($listaDestinos as $destino){
@@ -148,7 +172,34 @@
 					<?php
 				}
 				?>
-				<!-- <input type="text" name="txtLugarComision" id="txtLugarComision"> -->
+				</div><!-- #fin div foraneo -->
+				
+				<div id="local" style="display:block;">
+				<?php
+				$destinos = obtenDestinosfrecuentesLocales();
+				if (!empty($destinos)){
+					?>
+					<select name="txtLugarComision" id="txtLugarComision" onchange="otroLugarComision()">
+						<option value="0">Otro destino</option>
+					<?php
+						$listaDestinos = explode("~", $destinos);
+						foreach($listaDestinos as $destino){
+							$datosDestino = explode("|", $destino);
+							?>
+							<option value="<?php print $datosDestino[0] ?>"><?php print $datosDestino[1] ?></option>
+							<?php
+						}
+					?>
+					</select>
+					<?php
+				}
+				?>
+				</div><!-- #fin div local -->
+				
+				<div id="otroLugarComision" style="display:block;">
+				<label  for="txtOtroLugarComision">Otro destino de la comisión</label>
+				<input type="text" name="txtOtroLugarComision" id="txtOtroLugarComision">
+				</div>
 				
 				<label for="txtEncargadoComision">Responsable de la comisión</label>
 				<input type="text" name="txtEncargadoComision" id="txtEncargadoComision" required="required">

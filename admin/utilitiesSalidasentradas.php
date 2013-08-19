@@ -4,12 +4,12 @@
 *Funcion para registrar una salida de un vehiculo
 *@result 1 en caso de exito y 0 en caso contrario
 */
-function registraSalida($id_ctg_vehiculos, $id_tb_choferes, $tipo_salida, $nivel_gasolina, $nivel_aceite_motor, $nivel_aceite_transmision, $nivel_aceite_direccion, $nivel_liquido_frenos, $nivel_liquido_anticongelante, $llanta_refaccion, $gato, $llave_cruz, $actividad_comision, $lugar_comision, $observaciones, $km_salida, $folio, $usuario_creo, $usuario_modifico, $horaComision, $responsableComision, $actividadComisionOtro, $choferTemp, $numLicenciaTemp, $vigenciaLicenciaTemp){
+function registraSalida($id_ctg_vehiculos, $id_tb_choferes, $tipo_salida, $nivel_gasolina, $nivel_aceite_motor, $nivel_aceite_transmision, $nivel_aceite_direccion, $nivel_liquido_frenos, $nivel_liquido_anticongelante, $llanta_refaccion, $gato, $llave_cruz, $actividad_comision, $lugar_comision, $observaciones, $km_salida, $folio, $usuario_creo, $usuario_modifico, $horaComision, $responsableComision, $actividadComisionOtro, $choferTemp, $numLicenciaTemp, $vigenciaLicenciaTemp, $otroLugarComision){
 	$result = 0;
 	include "connection.php";
 	
 	try {
-		$STH = $DBH->prepare("insert into TB_SALIDA (id_ctg_vehiculos, id_tb_choferes, tipo_salida, nivel_gasolina, nivel_aceite_motor, nivel_aceite_transmision, nivel_aceite_direccion, nivel_liquido_frenos, nivel_liquido_anticongelante, llanta_refaccion, gato, llave_cruz, actividad_comision, lugar_comision, observaciones, fecha_creado, fecha_modificado, km_salida, folio, usuario_creo, usuario_modifico, hora_comision, responsable_comision, actividad_comision_otro, activo, nombre_chofer_temp, num_licencia_temp, VIGENCIA_LICENCIA_TEMP) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now(), ?, ?, ?, ?, ?, ?, ?, true, ?, ?, ?)");
+		$STH = $DBH->prepare("insert into TB_SALIDA (id_ctg_vehiculos, id_tb_choferes, tipo_salida, nivel_gasolina, nivel_aceite_motor, nivel_aceite_transmision, nivel_aceite_direccion, nivel_liquido_frenos, nivel_liquido_anticongelante, llanta_refaccion, gato, llave_cruz, actividad_comision, lugar_comision, observaciones, fecha_creado, fecha_modificado, km_salida, folio, usuario_creo, usuario_modifico, hora_comision, responsable_comision, actividad_comision_otro, activo, nombre_chofer_temp, num_licencia_temp, VIGENCIA_LICENCIA_TEMP, otro_lugar_comision) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), now(), ?, ?, ?, ?, ?, ?, ?, true, ?, ?, ?, ?)");
 		$STH->bindParam(1, $id_ctg_vehiculos);
 		$STH->bindParam(2, $id_tb_choferes);
 		$STH->bindParam(3, $tipo_salida);
@@ -35,6 +35,7 @@ function registraSalida($id_ctg_vehiculos, $id_tb_choferes, $tipo_salida, $nivel
 		$STH->bindParam(23, $choferTemp);
 		$STH->bindParam(24, $numLicenciaTemp);
 		$STH->bindParam(25, $vigenciaLicenciaTemp);
+		$STH->bindParam(26, $otroLugarComision);
 		$STH->execute();
 		$result = $STH->rowCount();
 	} catch (PDOException $ex) {

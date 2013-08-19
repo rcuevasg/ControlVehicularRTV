@@ -29,6 +29,10 @@ switch ($opt) {
 		$txtTipoSalida = $_POST["txtTipoSalida"];
 		$txtActividadComision = $_POST["txtActividadComision"];
 		$txtLugarComision = $_POST["txtLugarComision"];
+		$otroLugarComision = "";
+		if ($txtLugarComision == "0") {
+			$otroLugarComision = $_POST["txtOtroLugarComision"];
+		}
 		$txtNumPasajeros = $_POST["txtNumPasajeros"];
 		$txtKMSalida = $_POST["txtKMSalida"];
 		$txtObservaciones = $_POST["txtObservaciones"];
@@ -80,7 +84,7 @@ switch ($opt) {
 
 			if ($expiration_date > $today) {
 		
-				$res = registraSalida($txtVehiculoSale, $txtChoferes, $txtTipoSalida, $txtNivelGasolina, $txtNivelAceiteMotor, $txtNivelAceiteTransmision, $txtNivelAceiteDireccion, $txtNivelLiquidoFrenos, $txtNivelLiquidoAnticongelante, $llantaRefaccion, $gato, $llaveCruz, $txtActividadComision, $txtLugarComision, $txtObservaciones, $txtKMSalida, $folio, $usuario_creo, $usuario_creo, $txtHoraComision, $encargadoComision, $txtActividadComisionOtro, $txtNombreChoferTemp, $txtNumLicenciaTemp, $txtVigenciaLicencia);
+				$res = registraSalida($txtVehiculoSale, $txtChoferes, $txtTipoSalida, $txtNivelGasolina, $txtNivelAceiteMotor, $txtNivelAceiteTransmision, $txtNivelAceiteDireccion, $txtNivelLiquidoFrenos, $txtNivelLiquidoAnticongelante, $llantaRefaccion, $gato, $llaveCruz, $txtActividadComision, $txtLugarComision, $txtObservaciones, $txtKMSalida, $folio, $usuario_creo, $usuario_creo, $txtHoraComision, $encargadoComision, $txtActividadComisionOtro, $txtNombreChoferTemp, $txtNumLicenciaTemp, $txtVigenciaLicencia, $otroLugarComision);
 			
 				//Verificamos el exito del registro
 				if ($res > 0) {
