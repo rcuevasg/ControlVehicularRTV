@@ -100,7 +100,7 @@ switch ($opt) {
 			}//Fin del else de la expiracion de fecha
 		} //Fin de if choferes
 		else {
-			$res = registraSalida($txtVehiculoSale, $txtChoferes, $txtTipoSalida, $txtNivelGasolina, $txtNivelAceiteMotor, $txtNivelAceiteTransmision, $txtNivelAceiteDireccion, $txtNivelLiquidoFrenos, $txtNivelLiquidoAnticongelante, $llantaRefaccion, $gato, $llaveCruz, $txtActividadComision, $txtLugarComision, $txtObservaciones, $txtKMSalida, $folio, $usuario_creo, $usuario_creo, $txtHoraComision, $encargadoComision, $txtActividadComisionOtro, $txtNombreChoferTemp, $txtNumLicenciaTemp, $txtVigenciaLicencia);
+			$res = registraSalida($txtVehiculoSale, $txtChoferes, $txtTipoSalida, $txtNivelGasolina, $txtNivelAceiteMotor, $txtNivelAceiteTransmision, $txtNivelAceiteDireccion, $txtNivelLiquidoFrenos, $txtNivelLiquidoAnticongelante, $llantaRefaccion, $gato, $llaveCruz, $txtActividadComision, $txtLugarComision, $txtObservaciones, $txtKMSalida, $folio, $usuario_creo, $usuario_creo, $txtHoraComision, $encargadoComision, $txtActividadComisionOtro, $txtNombreChoferTemp, $txtNumLicenciaTemp, $txtVigenciaLicencia, $otroLugarComision);
 			
 				//Verificamos el exito del registro
 				if ($res > 0) {
